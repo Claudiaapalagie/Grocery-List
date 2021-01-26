@@ -33,7 +33,7 @@ const router = async () => {
 
     document.querySelector("#recipes-view").innerHTML = await view.getHTML();
 
-    console.log(match.route.view());
+
 }
 
 window.addEventListener("popstate", router)
