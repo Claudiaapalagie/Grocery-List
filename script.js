@@ -56,13 +56,6 @@ function addItemToShoppingList(event) {
     deleteItemFromBothLists(clickedBtn)
 }
 
-function isDuplicate(arr1, arr2) {
-    const found = arr2.find(elemArr2 =>
-        elemArr2.innerText === elemArr1.innerText)
-    return found
-
-}
-
 
 function addQuantityToShoppingList(clickedBtn, shoppingDiv) {
     if (clickedBtn.classList[0] === 'add-button') {
