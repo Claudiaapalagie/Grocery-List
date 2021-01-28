@@ -8,7 +8,7 @@
 
 body {
   background-image: linear-gradient(120deg, #f6d365 0%, #ffeefd 100%);
-  font-family: "Poppins", sans-serif;
+  font-family: Montserrat;
   color: #5d5a41;
   min-height: 100vh;
 }
@@ -21,6 +21,7 @@ H2 {
   background-color: #e0ba2f;
   text-align: center;
   color:#5d5a41;
+  font-family: Fugaz One;
 }
 
 header, form {
@@ -149,7 +150,7 @@ select {
 
 select {
   color: #5d5a41;
-  font-family: "Poppins", sans-serif;
+  font-family: Fugaz One;
   cursor: pointer;
   width: 12rem;
   height: 3rem;
