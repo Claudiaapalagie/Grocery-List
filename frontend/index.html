@@ -5,53 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Claudia's Grocery List</title>
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins|Fugaz One|Sonsie One|Montserrat&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="static/css/styles.css" rel="stylesheet" />
 </head>
-<header>
-    <h1>Recipe Grocery List</h1>
-</header>
+
 
 <body>
-    <form>
-        <input type="text" class="item-input" />
-        <button class="add-to-list-button" type="submit">
-            <i class="fas fa-plus-square"></i>
-        </button>
-        <div class="select">
-            <select name="shopping-items" class="filter-shopping-list">
-                <option value="all">All</option>
-                <option value="completed">Completed</option>
-                <option value="uncompleted">Uncompleted</option>
-            </select>
-        </div>
-    </form>
-    <h2>Ingredients Needed:</h2>
-    <section>
-        <ul class="ingredient-list"></ul>
-    </section>
-    <h2>Shopping List</h2>
-    <section>
-        <ul class="shopping-list"></ul>
-    </section>
-    <!-- <h2 class="recipe-header">Recipe List
-        <button class="add-to-recipe-button" type="submit">
-            <i class="fas fa-plus-square"></i>
-        </button>
-    </h2> -->
-    <section class="recipe-section">
-        <ul class="recipe-list">
-            <li>
-                <a href="/" class="nav__link" data-link>Recipe Grocery List</a>
-            </li>
-            <li>
-                <a href="/recipes" class="nav__link" data-link>Recipes</a>
-            </li>
-        </ul>
-    </section>
-    <div id="recipes-view"></div>
+    <div id="app">
+    </div>
     <script type="module" src="static/js/index.js"></script>
 </body>
 

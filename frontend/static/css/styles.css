@@ -55,16 +55,6 @@
     align-items: center;
   }
   
-  .recipe-section,
-  .recipe-header {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    margin-top: 2rem;
-    margin-left: 1rem;
-  }
-  
-  
   .ingredient-list, .shopping-list {
     list-style-type: none;
     color: white;
@@ -127,7 +117,7 @@
     background-color: rgb(12, 161, 137);
   }
   
-  .add-to-list-button, .add-to-recipe-button {
+  .add-to-list-button, .add-recipe-button {
     background-color: rgb(12, 161, 137);
   }
   
@@ -176,16 +166,108 @@
     pointer-events: none;
   }
   
-  /* .add-to-recipe-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 3rem;
-    margin-left: 1rem;
-    width: 3.1rem;
-  }
+  /* RECIPE VIEW */
   
-  .recipe-header {
-    width:12rem;
-  } */
-  
+  .recipe-title, h4, .index-view-item, .dialog-box {
+    font-family: Fugaz One;
+}
+
+.recipe-box-wrapper {
+    margin:5px;
+}
+
+
+.recipe-view .recipe-title {
+    background: rgb(212, 184, 160);
+    padding: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.recipe-view .recipe-title {
+    margin-right: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.recipe-view .recipe-title .title-row {
+    display: inline-block;
+}
+
+.recipe-view .recipe-title {
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 32px;
+    color: #fa9a0a;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.recipe-view .recipe-body {
+    background:rgb(231, 158, 99);
+    height: 330px;
+    overflow-y: scroll;
+    padding: 0 10px;
+    font-family: Montserrat;
+}
+
+.recipe-view .recipe-body h4 {
+    letter-spacing: 0.1em;
+}
+
+.recipe-title, h4, .dialog-box {
+    font-family: Fugaz One;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+h4 {
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.recipe-view .list {
+    max-width: 600px;
+}
+
+ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.recipe-view .recipe-title button:hover, .add-recipe-button button:hover {
+    color: #F46036;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.recipe-add-button-div {
+  background:rgb(231, 158, 99);
+}
