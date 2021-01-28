@@ -7,9 +7,9 @@
 }
 
 body {
-  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  background-image: linear-gradient(120deg, #f6d365 0%, #ffeefd 100%);
   font-family: "Poppins", sans-serif;
-  color: white;
+  color: #5d5a41;
   min-height: 100vh;
 }
 
@@ -18,9 +18,9 @@ header {
 }
 
 H2 {
-  background-color: rgb(231, 158, 99);
+  background-color: #e0ba2f;
   text-align: center;
-  color: white;
+  color:#5d5a41;
 }
 
 header, form {
@@ -35,17 +35,18 @@ form input, form button {
   font-size: 2rem;
   border: none;
   background: white;
+  color: #a5a093
 }
 
 form button {
-  color: #ff6f47;
+  color:  #5d5a41;
   background: #f7fffe;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 form button:hover {
-  background: #ff6f47;
+  background: #a5a093;
   color: white;
 }
 
@@ -81,6 +82,7 @@ section {
 
 .ingredient-item li, .shopping-item li {
   flex: 1;
+  color: #a5a093
 }
 
 .ingredient-item .quantity, .shopping-item .quantity-shopping {
@@ -96,7 +98,7 @@ section {
 }
 
 .trash-button, .check-button, .add-button, .add-to-recipe-button {
-  background: #ff6f47;
+  background:#5d5a41;
   color: white;
   border: none;
   padding: 1rem;
@@ -110,15 +112,15 @@ section {
 }
 
 .check-button {
-  background: rgb(11, 212, 162);
+  background: #e0ba2f;
 }
 
 .add-button {
-  background-color: rgb(12, 161, 137);
+  background-color: #e0ba2f;
 }
 
 .add-to-list-button {
-  background-color: rgb(12, 161, 137);
+  background-color:  #e0ba2f;
 }
 
 .fall {
@@ -146,7 +148,7 @@ select {
 }
 
 select {
-  color: #ff6f47;
+  color: #5d5a41;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
   width: 12rem;
@@ -161,7 +163,7 @@ select {
   top: 0;
   right: 0;
   padding: 1rem;
-  background: #ff6f47;
+  background: #e0ba2f;
   cursor: pointer;
   pointer-events: none;
 }
@@ -173,11 +175,11 @@ select {
 }
 
 .recipe-box-wrapper {
-  margin:20px 15%;
+  margin: 20px 15%;
 }
 
 .recipe-view .recipe-title {
-  background: #084C61;
+  background: #e0ba2f;;
   padding: 10px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -195,7 +197,7 @@ select {
   border: none;
   outline: none;
   font-size: 32px;
-  color: #481D24;
+  color: #5d5a41;
 }
 
 .recipe-body li {
@@ -204,7 +206,7 @@ select {
 }
 
 .recipe-view .recipe-body {
-  background: #481D24;
+  background: #a5a093;
   height: 330px;
   overflow-y: scroll;
   padding: 0 10px;
@@ -212,7 +214,7 @@ select {
 }
 
 .recipe-add-button-div {
-  background: #084C61;
+  background: #e0ba2f;;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   padding: 5px;
@@ -223,14 +225,14 @@ select {
   border: none;
   outline: none;
   font-size: 32px;
-  color: #481D24;
+  color: #5d5a41;
 }
 
 .recipe-view .recipe-body h4 {
   letter-spacing: 0.1em;
 }
 
-.recipe-title, h4 {
+.recipe-title, h4, .index-view-item {
   font-family: Fugaz One;
 }
 
@@ -272,10 +274,50 @@ ol {
 }
 
 .recipe-view .recipe-title button:hover, .recipe-add-button-div button:hover {
-  color: #F46036;
+  color: #a5a093;
 }
 
 button:hover {
   cursor: pointer;
+}
+
+.nav__link {
+  color:#5d5a41;
+}
+
+.recipes-list-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Fugaz One;
+  color:#5d5a41;
+}
+
+.index-view {
+  height: 10rem;
+  overflow: auto;
+  margin-bottom: 5px;
+  border: 5px solid #e0ba2f;
+  border-bottom: 10px solid #e0ba2f;
+  border-top: 10px solid #e0ba2f;
+  border-radius: 10px;
+}
+
+.index-view .index-view-item:nth-child(odd) {
+  background: #e0ba2f;
+  color: #F46036;
+}
+
+.index-view .index-view-item {
+  padding: 7px;
+  cursor: pointer;
+}
+
+.index-view a {
+  color:#5d5a41;
 }
 

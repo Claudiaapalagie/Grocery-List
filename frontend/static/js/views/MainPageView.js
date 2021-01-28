@@ -29,18 +29,9 @@ export default class extends AbstractView {
     <section>
         <ul class="shopping-list"></ul>
     </section>
-    <!-- <h2 class="recipe-header">Recipe List
-        <button class="add-to-recipe-button" type="submit">
-            <i class="fas fa-plus-square"></i>
-        </button>
-    </h2> -->
-    <section class="recipe-section">
-        <ul class="recipe-list">
-            <li>
-                <a href="/recipes" class="nav__link" data-link>Recipes</a>
-            </li>
-        </ul>
-    </section>
+    <h2>
+        <a href="/recipes" class="nav__link" data-link>Recipes</a>
+    </h2>
         `;
     }
 }

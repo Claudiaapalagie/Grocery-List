@@ -8,15 +8,14 @@ export default class extends AbstractView {
 
     async getHtml() {
         return `
-        <h1>Recipes</h1>
-        <ul>
-          <li>
-            <a href="/recipes/pasta" data-link> Pasta</a>
-          </li>
-          <li>
-            <a href="/recipes/chicken" data-link> Chicken</a>
-          </li>
-        </ul>
+         <h1 class="recipes-list-title">Recipes List</h1>
+        <div class="index-view">
+          <div class="index-view-item">
+          <a href="/recipes/pasta" data-link>Pasta</a>
+          </div>
+          <div class="index-view-item">
+          <a href="/recipes/chicken" data-link>Chicken</a>
+          </div>
       `;
     }
 }
