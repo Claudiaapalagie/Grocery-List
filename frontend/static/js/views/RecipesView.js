@@ -8,12 +8,12 @@ export default class extends AbstractView {
     }
 
     async getHtml() {
-       
+
         switch (this.recipeId) {
-            case 'dessert' :
+            case 'dessert':
                 return bananaRecipe;
                 break;
-            case 'pasta' :
+            case 'pasta':
                 return pastaRecipe;
                 break;
         }
