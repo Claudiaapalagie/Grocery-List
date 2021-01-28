@@ -10,8 +10,8 @@ export default class extends AbstractView {
     async getHtml() {
 
         switch (this.recipeId) {
-            case 'dessert':
-                return bananaRecipe;
+            case 'chicken':
+                return chickenRecipe;
                 break;
             case 'pasta':
                 return pastaRecipe;
@@ -19,6 +19,7 @@ export default class extends AbstractView {
         }
     }
 }
+
 
 const pastaRecipe = `
 <body>
@@ -73,4 +74,46 @@ const pastaRecipe = `
 </body>
 `;
 
-const bananaRecipe = `banana recipe`;
+const chickenRecipe = `<body>
+<div class="root">
+<div class="recipe-box-wrapper">
+    <div class="content-recipe">
+        <div class="recipe-view">
+            <div class="recipe-title">
+                <div class="recipe-view-name title-row">Chicken</div>
+                <div class="title-row">
+                    <button class="recipe-delete-button">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <button class="recipe-edit-button">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="recipe-body">
+                <h4>Ingredients:</h4>
+                    <ul class="ingredient list">
+                    <li>3 tablespoons butter</li>
+                    <li>1 teaspoon seasoning salt</li>
+                    <li>2 teaspoons garlic powder</li>
+                    <li>1 teaspoon onion powder </li>
+                    <li>4 skinless, boneless chicken breast halves</li>
+                </ul>
+                <h4>Directions:</h4>
+                    <ol class="directions list">
+                        <li>Melt butter in a large skillet over medium high heat.</li>
+                        <li>Add chicken and sprinkle with garlic powder, seasoning salt and onion powder.</li>
+                        <li>Saute about 10 to 15 minutes on each side, or until chicken is cooked through and juices run clear.</li>
+                 </ol>
+            </div>
+        </div>
+
+    </div>
+    <div class="recipe-add-button-div">
+        <button id="add-recipe-button">
+            <i class="fa fa-plus-square"></i>
+        </button>
+    </div>
+</div>
+</div>
+</body>`;

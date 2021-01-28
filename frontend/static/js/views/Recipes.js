@@ -14,7 +14,7 @@ export default class extends AbstractView {
             <a href="/recipes/pasta" data-link> Pasta</a>
           </li>
           <li>
-            <a href="/recipes/dessert" data-link> Desert</a>
+            <a href="/recipes/chicken" data-link> Chicken</a>
           </li>
         </ul>
       `;
