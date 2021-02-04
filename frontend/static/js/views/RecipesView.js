@@ -4,12 +4,27 @@ export default class extends AbstractView {
     templateUrl = "/static/js/views/recipesView.html"
     constructor(params) {
         super(params);
-        this.recipeId = params.id;
+        // this.recipeId = params.id;
         this.setTitle("Recipes View");
     };
 
 
     init() {
+
+
+        const recipeIndex = [
+            {
+                'recipe': 'Artichoke-Pasta', 'ingredients': ['2 tablespoons butter', '2 cloves garlic, minced', '1 cup heavy cream', '3/4 teaspoon salt', '1 teaspoon fresh-ground black pepper', '2 1/2 cups canned, drained artichoke hearts (two 14-ounce cans), rinsed and cut into halves or quarters', '3/4 pound fusilli', '1/2 cup grated Parmesan cheese', '2 tablespoons chopped chives, scallion tops, or parsley'], 'directions': ['In a medium saucepan, melt the butter over moderately low heat. Add the garlic and cook for 30 seconds. Stir in the cream, salt, pepper, and artichoke hearts. Cook until just heated through, about 3 minutes.', 'In a large pot of boiling, salted water, cook the fusilli until just done, about 13 minutes. Drain the pasta and toss with the cream sauce, Parmesan, and chives.']
+            },
+
+            {
+                'recipe': 'Lime-Chicken-Tacos', 'ingredients': ['1 1/2 pounds skinless, boneless chicken breast meat - cubed', '1/8 cup red wine vinegar', '1/2 lime, juiced', '1 teaspoon white sugar', '1/2 teaspoon salt', '1/2 teaspoon ground black pepper', '2 green onions, chopped', '2 cloves garlic, minced', '1 teaspoon dried oregano', '10 (6 inch) corn tortillas', '1 tomato, diced', '1/4 cup shredded lettuce', '1/4 cup shredded Monterey Jack cheese', '1/4 cup salsa'], 'directions': ['Saute chicken in a medium saucepan over medium high heat for about 20 minutes. Add vinegar, lime juice, sugar, salt, pepper, green onion, garlic and oregano. Simmer for an extra 10 minutes.', 'Heat an iron skillet over medium heat. Place a tortilla in the pan, warm, and turn over to heat the other side. Repeat with remaining tortillas. Serve lime chicken mixture in warm tortillas topped with tomato, lettuce, cheese and salsa.']
+            },
+
+            {
+                'recipe': 'Artichoke-Dip', 'ingredients': ['1 8oz package soft cream cheese', '4oz mayonnaise', '4oz sour cream', '1/4 Cup Fresh Grated Parmesan Cheese', '1/4 Cup Fresh Grated Romano Cheese', '2 eggs', '3/4 Cup dairy sour cream', '1 16oz can artichoke hearts', '1/4 Cup fresh chopped chives', '1 tbs fresh minced garlic'], 'directions': ['Soften the cream cheese before mixing.', 'Rinse well, then dice the artichokes into small ½” size pieces.', 'Into a mixing bowl place the softened cream cheese. Mix in the mayonnaise, sour cream, the Parmesan and Romano cheese, artichokes and garlic.', 'When the mixture is fairly well blended, spoon into a 9” round glass pie dish.', 'Set Oven to Bake at 350 degrees.', 'Place un-covered dish into oven for 20 – 25 minutes until the edges appear slightly golden and mixture is bubbling at the edge.', 'Remove and sprinkle chopped chives on top and let cool about 5 minutes before serving.', 'Enjoy!']
+            }
+        ];
 
         const recipeDeleteBtn = document.querySelectorAll('.recipe-delete-button')
         const recipeEditBtn = document.querySelectorAll('.recipe-edit-button')
@@ -45,7 +60,9 @@ export default class extends AbstractView {
         const DELETE_BUTTON_CLASS = 'recipe-delete-button';
 
 
+        //Event Listeners
 
+        
 
         //Delete Recipe
 
@@ -89,7 +106,7 @@ export default class extends AbstractView {
         function openDialogBox(dialogBox) {
             if (dialogBox !== null) {
                 dialogBox.classList.add('active')
-                overlay.classList.add('active')
+                // overlay.classList.add('active')
                 resetDialogBox();
             }
         }
@@ -100,9 +117,7 @@ export default class extends AbstractView {
             button.addEventListener('click', createRecipeDiv)
         })
 
-        function createRecipeDiv(event) {
-            const clickedButton = event.target;
-            console.log(clickedButton)
+        function createRecipeDiv() {
             const appDiv = document.querySelector('#app');
             const recipeWrap = document.createElement('div');
             recipeWrap.classList.add('recipe-box-wrapper');
@@ -116,6 +131,7 @@ export default class extends AbstractView {
             recipeViewName.classList.add('recipe-view-name', 'title-row');
             recipeTitle.appendChild(recipeViewName);
             recipeViewName.innerText = recipeName.value;
+
             const titleRow = document.createElement('div');
             titleRow.classList.add('title-row');
 
@@ -152,15 +168,12 @@ export default class extends AbstractView {
 
             let listOfIngredients = recipeIngredients.value;
 
-            console.log("Lista de Ingrediente")
-            console.log(listOfIngredients);
 
             /*the updateList function populates directions\ingredients section in the recipe body 
             with the information which was filled inside the popup
             */
 
             updateList(listOfIngredients, ingredientsList)
-
 
 
             const headerDirections = document.createElement('h4');
@@ -172,7 +185,6 @@ export default class extends AbstractView {
             recipeBody.appendChild(directionsList);
 
 
-
             let listOfDirections = recipeDirections.value;
 
             /*
@@ -181,25 +193,15 @@ export default class extends AbstractView {
             */
             updateList(listOfDirections, directionsList);
 
-
-
             recipeView.appendChild(recipeTitle);
             recipeView.appendChild(recipeBody);
 
-            // const addButtonDiv = document.createElement('div');
-            // addButtonDiv.classList.add('recipe-add-button-div');
-
-            // createButtonElement('button', ADD_BUTTON_ICON, ADD_BUTTON_CLASS, addButtonDiv);
-
-
             contentRecipe.appendChild(recipeView);
             recipeWrap.appendChild(contentRecipe);
-            // recipeWrap.appendChild(addButtonDiv);
+
+            saveLocalRecipe(recipeName.value, recipeIngredients.value.split("\\"), recipeDirections.value.split("\\"))
+
             appDiv.appendChild(recipeWrap);
-
-
-            // const allAddButtons = recipeWrap.querySelectorAll('.add-recipe-button');
-            // openAddRecipePopup(allAddButtons);
 
             dialogBox.classList.remove('active');
             resetDialogBox();
@@ -231,7 +233,7 @@ export default class extends AbstractView {
             });
         });
 
-        //helper functions
+        //generic functions
 
         function createButtonElement(elementType, buttonIcon, classToAdd, divToBeAppendedTo) {
             const button = document.createElement(elementType)
@@ -251,20 +253,6 @@ export default class extends AbstractView {
                 element.removeChild(element.firstChild)
             }
         }
-
-        /*the openAddRecipePopup function makes the oppening of the add-recipe pop-up possible
-        from the newly created  add - buttons.
-         */
-        function openAddRecipePopup(buttons) {
-            buttons.forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const clickedButton = event.target;
-                    clickedButton.dataset.modalTarget = ADD_DIALOG_BOX_ID;
-                    const dialogBox = document.querySelector(clickedButton.dataset.modalTarget);
-                    openDialogBox(dialogBox);
-                });
-            });
-        };
 
         /*the openEditRecipePopup function makes the oppening of the add-recipe pop-up possible
         from the newly created  add - buttons.
@@ -301,7 +289,7 @@ export default class extends AbstractView {
 
                             removeAllChildren(ingredientsList);
 
-                            console.log(ingredientsList)
+   
                             updateList(ingredientInput, ingredientsList);
 
                             const directionInputText = dialogDiv.children[7];
@@ -360,7 +348,7 @@ export default class extends AbstractView {
 
                     updateList(ingredientInput, ingredientsList);
 
-                    console.log(ingredientsList)
+            
 
                     const directionInputText = dialogDiv.children[7];
                     let directionsInput = directionInputText.value;
@@ -376,7 +364,7 @@ export default class extends AbstractView {
 
 
         function loadContentforEditMode(clickedButton) {
-            
+
             const recipeViewDiv = clickedButton.parentElement.parentElement.parentElement.parentElement;
             const recipeTitleDiv = recipeViewDiv.children[0];
             const recipeTitle = recipeTitleDiv.children[0];
@@ -402,7 +390,7 @@ export default class extends AbstractView {
             recipeIngredientInput.forEach(input => {
                 input.value = ingredientText;
             });
- 
+
             const directionsItems = Array.from(directionsList.children);
 
             const directionText = directionsItems.map(item => {
@@ -416,17 +404,28 @@ export default class extends AbstractView {
         };
 
 
+        function saveLocalRecipe(recipe, ingredients, directions) {
+            var recipeObj = {
+                'recipe': recipe, 'ingredients': ingredients, 'directions': directions
+            };
+            let recipes;
+            if (JSON.parse(localStorage.getItem('recipes')) === null) {
+                recipes = recipeIndex[0];
+            } else {
+                recipes = JSON.parse(localStorage.getItem('recipes'));
+            };
+            recipes.push(recipeObj);
+            localStorage.setItem("recipes", JSON.stringify(recipes));
+        };
 
-
-
-
-
-
-
-
-
-
-
+        function getRecipes() {
+           
+            /*
+            
+            ............
+            
+            */ 
+        };
 
 
 
