@@ -20,7 +20,7 @@ header {
 H2 {
   background-color: #e0ba2f;
   text-align: center;
-  color:#5d5a41;
+  color: #5d5a41;
   font-family: Fugaz One;
 }
 
@@ -40,7 +40,7 @@ form input, form button {
 }
 
 form button {
-  color:  #5d5a41;
+  color: #5d5a41;
   background: #f7fffe;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -99,7 +99,7 @@ section {
 }
 
 .trash-button, .check-button, .add-button, .add-to-recipe-button {
-  background:#5d5a41;
+  background: #5d5a41;
   color: white;
   border: none;
   padding: 1rem;
@@ -121,7 +121,7 @@ section {
 }
 
 .add-to-list-button {
-  background-color:  #e0ba2f;
+  background-color: #e0ba2f;
 }
 
 .fall {
@@ -171,7 +171,7 @@ select {
 
 /* RECIPE VIEW */
 
-.recipe-title, h4 {
+.recipe-title, h4, .dialog-box {
   font-family: Fugaz One;
 }
 
@@ -179,8 +179,8 @@ select {
   margin: 20px 15%;
 }
 
-.recipe-view .recipe-title {
-  background: #e0ba2f;;
+.recipe-view .recipe-title, .recipe-add-button-div {
+  background: #e0ba2f;
   padding: 10px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -215,7 +215,7 @@ select {
 }
 
 .recipe-add-button-div {
-  background: #e0ba2f;;
+  background: #e0ba2f;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   padding: 5px;
@@ -283,7 +283,7 @@ button:hover {
 }
 
 .nav__link {
-  color:#5d5a41;
+  color: #5d5a41;
 }
 
 .recipes-list-title {
@@ -295,7 +295,7 @@ button:hover {
   font-size: 30px;
   font-weight: bold;
   font-family: Fugaz One;
-  color:#5d5a41;
+  color: #5d5a41;
 }
 
 .index-view {
@@ -310,7 +310,6 @@ button:hover {
 
 .index-view .index-view-item:nth-child(odd) {
   background: #e0ba2f;
-  color: #F46036;
 }
 
 .index-view .index-view-item {
@@ -319,6 +318,112 @@ button:hover {
 }
 
 .index-view a {
-  color:#5d5a41;
+  color: #5d5a41;
 }
 
+.dialog-box .corner-close, .dialog-box button, .recipe-view .recipe-title button, .add-button button {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 32px;
+}
+
+.dialog-box .corner-close:hover, .dialog-box button:hover, .recipe-view .recipe-title button:hover, .add-button button:hover {
+  color: #a5a093;
+}
+
+.dialog-wrap {
+  box-shadow: 2px 10px 10px 5000px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dialog-box {
+  display: none;
+}
+
+.dialog-box .input-title {
+  margin: 5px;
+}
+
+.dialog-box textarea {
+  margin-bottom: 10px;
+  background: #ffffff;
+  min-width: 300px;
+  min-height: 60px;
+  resize: vertical;
+  color: #10283e;
+  font-weight: bold;
+  font-size: 13px;
+  overflow: auto;
+}
+
+.dialog-box textarea:focus {
+  box-shadow: 0 0 5px #e0ba2f;
+  outline: 1px solid #e0ba2f;
+  border: 1px solid #e0ba2f;
+}
+
+.dialog-box textarea:nth-of-type(3) {
+  min-height: 100px;
+}
+
+.dialog-box textarea:first-of-type {
+  resize: none;
+  min-height: 15px !important;
+}
+
+.dialog-box button:not(:first-of-type) {
+  margin-bottom: 15px;
+}
+
+.dialog-box button {
+  font-family: Fugaz One;
+  font-size: 15px;
+  margin-right: 8px;
+  background: #5d5a41;
+  border-radius: 5px;
+}
+
+.dialog-box button:hover {
+  color: #a5a093;
+}
+
+.dialog-box .corner-close {
+  font-size: 24px !important;
+  color: #5d5a41;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.dialog-box.active {
+  text-align: center;
+  position: fixed;
+  width: 500px;
+  min-width: 300px;
+  top: 50%;
+  left: 50%;
+  margin-left: -250px;
+  margin-top: -200px;
+  box-shadow: 3px 3px 10px black;
+  border-radius: 15px;
+  background-color: #9d9dcc;
+  z-index: 10;
+  display: table;
+}
+
+#overlay, #overlay-edit {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+
+#overlay.active,
+#overlay-edit.active {
+  opacity: 1;
+}

@@ -34,6 +34,7 @@ const router = async () => {
     });
 
     let match = potentialMatches.find(potentialMatch => potentialMatch.result !== null);
+    
 
     if (!match) {
         match = {
@@ -43,9 +44,33 @@ const router = async () => {
     }
 
     const view = new match.route.view(getParams(match));
+    const htmlTemplateUrl = view.templateUrl;
+    // console.log(view.path)
+    const htmlTemplate = await fetch(htmlTemplateUrl);
+    const template = await htmlTemplate.text();
+    const childElement = document.createElement('template');
+    childElement.innerHTML = template;
+    if(view.templateUrl !== "/static/js/views/recipesView.html") {
+        const actualItems = childElement.content.firstChild;
+        document.querySelector("#app").removeChild(document.querySelector("#app").firstChild)
+        document.querySelector("#app").appendChild(actualItems);
+    } else {
+        const actualItems1 = childElement.content.children[0];
+        const actualItems2 = childElement.content.children[2];
+        const actualItems4 = childElement.content.children[3];
 
-    document.querySelector("#app").innerHTML = await view.getHtml();
+        const actualItems3 = childElement.content.lastChild;
+
+        document.querySelector("#app").removeChild(document.querySelector("#app").firstChild)
+        document.querySelector("#app").appendChild(actualItems1);
+        document.querySelector("#app").appendChild(actualItems2);
+        document.querySelector("#app").appendChild(actualItems3);
+        document.querySelector("#app").appendChild(actualItems4);
+    }
+    view.init();
+  
 };
+
 
 window.addEventListener("popstate", router);
 
