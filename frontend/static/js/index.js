@@ -1,4 +1,4 @@
-import Recipes from "./views/Recipes.js";
+// import Recipes from "./views/Recipes.js";
 import RecipesView from "./views/RecipesView.js";
 import MainPageView from "./views/MainPageView.js";
 
@@ -21,8 +21,8 @@ const navigateTo = url => {
 const router = async () => {
     const routes = [
         { path: "/", view: MainPageView },
-        // { path: "/recipes", view: Recipes },
         { path: "/recipes", view: RecipesView }
+        // { path: "/recipes/:id", view: Recipes }
     ];
 
     // Test each route for potential match
@@ -49,6 +49,14 @@ const router = async () => {
         };
     };
 
+    function keepFirstChild(container) {
+        while (container.children.length > 0) {
+            container.removeChild(container.lastChild);
+        };
+    };
+
+    const templateUrlRecipes = "/static/js/views/recipes.html";
+
     const app = document.querySelector("#app");
 
     const view = new match.route.view(getParams(match));
@@ -58,7 +66,12 @@ const router = async () => {
     const childElement = document.createElement('template');
     childElement.innerHTML = template;
 
-    keepLastChild(app);
+    if (htmlTemplateUrl !== templateUrlRecipes) {
+        keepLastChild(app);
+    } else {
+        keepFirstChild(app);
+    };
+        
 
     const actualItems = childElement.content.firstChild;
     app.appendChild(actualItems);

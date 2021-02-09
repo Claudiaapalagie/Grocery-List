@@ -1,4 +1,5 @@
 import AbstractView from "./AbstractView.js";
+import { addRecipe, arr, deleteRecipe, editStoreRecipe } from './store.js';
 
 export default class extends AbstractView {
     templateUrl = "/static/js/views/recipesView.html"
@@ -26,9 +27,10 @@ export default class extends AbstractView {
             }
         ];
 
-        const recipeDeleteBtn = document.querySelectorAll('.recipe-delete-button')
-        const recipeEditBtn = document.querySelectorAll('.recipe-edit-button')
-        const recipeAddBtn = document.querySelectorAll('.add-recipe-button')
+        const recipeDeleteBtn = document.querySelectorAll('.recipe-delete-button');
+        const recipeEditBtn = document.querySelectorAll('.recipe-edit-button');
+        const recipeAddBtn = document.querySelectorAll('.add-recipe-button');
+        const app = document.querySelector('#app');
 
 
         //Dialog Box Elements
@@ -36,21 +38,17 @@ export default class extends AbstractView {
         let recipeName = document.querySelector(".add-recipe-name");
         let recipeIngredients = document.querySelector(".add-ingredients");
         let recipeDirections = document.querySelector(".add-directions");
-        const cornerCloseBtn = document.querySelectorAll('.corner-close')
-        const overlay = document.getElementById('overlay')
-        const overlayEdit = document.getElementById('overlay-edit')
-        const closeBtnDialog = document.querySelectorAll('.add-close')
-        const addBtnDialog = document.querySelectorAll('.add-submit')
-        const submitBtnDialog = document.querySelectorAll('.edit-submit')
-        const dialogBox = document.querySelector('.dialog-box')
+        const cornerCloseBtn = document.querySelectorAll('.corner-close');
+        const overlay = document.getElementById('overlay');
+        const overlayEdit = document.getElementById('overlay-edit');
+        const closeBtnDialog = document.querySelectorAll('.add-close');
+        const addBtnDialog = document.querySelectorAll('.add-submit');
+        const submitBtnDialog = document.querySelectorAll('.edit-submit');
+        const dialogBox = document.querySelector('.dialog-box');
+
 
 
         // CONSTANTS
-
-        const ADD_BUTTON_ICON = '<i class="fa fa-plus-square"></i>';
-        const ADD_BUTTON_CLASS = 'add-recipe-button';
-        const ADD_DIALOG_BOX_ID = '#dialog-box';
-
 
         const EDIT_BUTTON_ICON = '<i class="fas fa-edit"></i>';
         const EDIT_BUTTON_CLASS = 'recipe-edit-button';
@@ -62,7 +60,7 @@ export default class extends AbstractView {
 
         //Event Listeners
 
-        
+
 
         //Delete Recipe
 
@@ -76,7 +74,21 @@ export default class extends AbstractView {
             const clickedButton = event.target;
             const containerDiv = clickedButton.parentElement.parentElement.parentElement.parentElement.parentElement;
             containerDiv.removeChild(containerDiv.children[0]);
+
+            const indexView = document.querySelector('.index-view');
+            const recipeButtons = document.querySelectorAll('[data-link-button]');
+            const recipeName = clickedButton.parentElement.parentElement.firstChild.innerText;
+
+            recipeButtons.forEach(btn => {
+                if (btn.innerText === recipeName) {
+                    indexView.removeChild(btn.parentElement);
+                };
+            });
+
+            deleteRecipe(recipeName);
+
         };
+
 
 
         //Add Recipe
@@ -85,6 +97,7 @@ export default class extends AbstractView {
             button.addEventListener('click', () => {
                 const dialogBox = document.querySelector(button.dataset.modalTarget);
                 openDialogBox(dialogBox);
+
             });
         });
 
@@ -98,27 +111,23 @@ export default class extends AbstractView {
             if (dialogBox !== null) {
                 dialogBox.classList.add('active');
                 overlayEdit.classList.add('active');
-            }
-        }
-
-
+            };
+        };
 
         function openDialogBox(dialogBox) {
             if (dialogBox !== null) {
-                dialogBox.classList.add('active')
-                // overlay.classList.add('active')
+                dialogBox.classList.add('active');
                 resetDialogBox();
-            }
-        }
+            };
+        };
 
         //create Recipe Box each time add button is pressed from inside the pop-up
 
         addBtnDialog.forEach(button => {
-            button.addEventListener('click', createRecipeDiv)
-        })
+            button.addEventListener('click', createRecipeDiv);
+        });
 
         function createRecipeDiv() {
-            const appDiv = document.querySelector('#app');
             const recipeWrap = document.createElement('div');
             recipeWrap.classList.add('recipe-box-wrapper');
             const contentRecipe = document.createElement('div');
@@ -151,7 +160,6 @@ export default class extends AbstractView {
             allDeleteButtons.forEach(button => {
                 button.addEventListener('click', removeRecipe)
             });
-
 
             const recipeBody = document.createElement('div');
             recipeBody.classList.add('recipe-body');
@@ -199,12 +207,19 @@ export default class extends AbstractView {
             contentRecipe.appendChild(recipeView);
             recipeWrap.appendChild(contentRecipe);
 
-            saveLocalRecipe(recipeName.value, recipeIngredients.value.split("\\"), recipeDirections.value.split("\\"))
+            saveLocalRecipe(recipeName.value, recipeIngredients.value.split("\\"), recipeDirections.value.split("\\"));
 
-            appDiv.appendChild(recipeWrap);
+            app.appendChild(recipeWrap);
+
+
+            while (app.childElementCount > 2) {
+                app.removeChild(app.children[1]);
+            };
 
             dialogBox.classList.remove('active');
+
             resetDialogBox();
+
         };
 
 
@@ -278,6 +293,7 @@ export default class extends AbstractView {
 
                     const allSubmitButtons = Array.from(dialogBoxEdit.getElementsByClassName('edit-submit'));
 
+
                     allSubmitButtons.forEach(button => {
                         button.addEventListener('click', (event) => {
                             const clickedButton = event.target;
@@ -289,7 +305,7 @@ export default class extends AbstractView {
 
                             removeAllChildren(ingredientsList);
 
-   
+
                             updateList(ingredientInput, ingredientsList);
 
                             const directionInputText = dialogDiv.children[7];
@@ -299,14 +315,16 @@ export default class extends AbstractView {
 
                             updateList(directionsInput, directionsList);
                             dialogBox.classList.remove('active');
-                            resetDialogBox();
-
-                        })
+                            saveLocalRecipe(recipeTitle.innerText, ingredientInput.split('\\'),directionsInput.split('\\' ));
+                            resetDialogBox();              
+                    
+                        });
                     });
 
-                })
+                });
             });
         };
+
 
         function updateList(item, divToBeAppendedTo) {
             if (item !== null && item !== "") {
@@ -317,6 +335,17 @@ export default class extends AbstractView {
                 });
             };
         };
+
+        function showList(item, divToBeAppendedTo) {
+            if (item !== null && item !== "") {
+                item.forEach(ingItem => {
+                    let li = document.createElement('li');
+                    divToBeAppendedTo.appendChild(li);
+                    li.innerText = ingItem;
+                });
+            };
+        };
+
 
         function editRecipe(event) {
             const clickedButton = event.target;
@@ -348,7 +377,7 @@ export default class extends AbstractView {
 
                     updateList(ingredientInput, ingredientsList);
 
-            
+
 
                     const directionInputText = dialogDiv.children[7];
                     let directionsInput = directionInputText.value;
@@ -357,7 +386,9 @@ export default class extends AbstractView {
 
                     updateList(directionsInput, directionsList);
                     dialogBox.classList.remove('active');
-                    resetDialogBox()
+
+                    resetDialogBox();
+
                 });
             });
         };
@@ -404,29 +435,129 @@ export default class extends AbstractView {
         };
 
 
-        function saveLocalRecipe(recipe, ingredients, directions) {
+        function saveLocalRecipe(recipeName, ingredients, directions) {
             var recipeObj = {
-                'recipe': recipe, 'ingredients': ingredients, 'directions': directions
+                'recipeName': recipeName, 'ingredients': ingredients, 'directions': directions
             };
-            let recipes;
-            if (JSON.parse(localStorage.getItem('recipes')) === null) {
-                recipes = recipeIndex[0];
-            } else {
-                recipes = JSON.parse(localStorage.getItem('recipes'));
-            };
-            recipes.push(recipeObj);
-            localStorage.setItem("recipes", JSON.stringify(recipes));
+            addRecipe(recipeObj);
+
+            populateIndexView(recipeObj);
         };
 
-        function getRecipes() {
-           
-            /*
-            
-            ............
-            
-            */ 
+
+        function populateIndexView(recipeObj) {
+
+            const recipeName = recipeObj.recipeName;
+            const indexView = document.querySelector('.index-view');
+            const indexViewItem = document.createElement('div');
+            indexViewItem.classList.add('index-view-item');
+            const recipeButton = document.createElement('button');
+            recipeButton.setAttribute('data-link-button', '');
+            recipeButton.innerHTML = recipeName;
+            indexViewItem.appendChild(recipeButton);
+            indexView.appendChild(indexViewItem);
+
+
+            const allRecipeButtons = document.querySelectorAll('[data-link-button]');
+            allRecipeButtons.forEach(recipeBtn => {
+
+                recipeBtn.addEventListener('click', () => {
+
+                    const recipeObj = arr.filter(obj => obj.recipeName === recipeBtn.innerText)[0];
+
+                    let {
+                        recipeName,
+                        ingredients,
+                        directions
+
+                    } = recipeObj;
+
+                    while (app.childElementCount > 1) {
+                        app.removeChild(app.children[1]);
+                    };
+
+                    showRecipe(recipeName, ingredients, directions);
+
+                });
+            });
+
         };
 
+
+
+        function showRecipe(recipeName, ingredients, directions) {
+            const recipeWrap = document.createElement('div');
+            recipeWrap.classList.add('recipe-box-wrapper');
+            const contentRecipe = document.createElement('div');
+            contentRecipe.classList.add('content-recipe');
+            const recipeView = document.createElement('div');
+            recipeView.classList.add('recipe-view');
+            const recipeTitle = document.createElement('div');
+            recipeTitle.classList.add('recipe-title');
+            let recipeViewName = document.createElement('div');
+            recipeViewName.classList.add('recipe-view-name', 'title-row');
+            recipeTitle.appendChild(recipeViewName);
+            recipeViewName.innerText = recipeName;
+
+            const titleRow = document.createElement('div');
+            titleRow.classList.add('title-row');
+
+
+            createButtonElement('button', DELETE_BUTTON_ICON, DELETE_BUTTON_CLASS, titleRow)
+            createButtonElement('button', EDIT_BUTTON_ICON, EDIT_BUTTON_CLASS, titleRow);
+
+
+            recipeTitle.appendChild(titleRow);
+
+            const allEditButtons = Array.from(titleRow.getElementsByClassName('recipe-edit-button'));
+
+            openEditRecipePopup(allEditButtons);
+
+            const allDeleteButtons = titleRow.querySelectorAll('.recipe-delete-button');
+
+            allDeleteButtons.forEach(button => {
+                button.addEventListener('click', removeRecipe);
+            });
+
+            const recipeBody = document.createElement('div');
+            recipeBody.classList.add('recipe-body');
+
+
+            const headerIngredients = document.createElement('h4');
+            headerIngredients.innerHTML = 'Ingredients:';
+            recipeBody.appendChild(headerIngredients);
+
+
+            const ingredientsList = document.createElement('ul');
+            ingredientsList.classList.add('ingredients-list');
+            recipeBody.appendChild(ingredientsList);
+
+
+            showList(ingredients, ingredientsList)
+
+
+            const headerDirections = document.createElement('h4');
+            headerDirections.innerHTML = 'Directions:';
+            recipeBody.appendChild(headerDirections);
+
+            const directionsList = document.createElement('ol');
+            directionsList.classList.add('directionsList');
+            recipeBody.appendChild(directionsList);
+
+
+            showList(directions, directionsList);
+
+            recipeView.appendChild(recipeTitle);
+            recipeView.appendChild(recipeBody);
+
+            contentRecipe.appendChild(recipeView);
+            recipeWrap.appendChild(contentRecipe);
+
+            app.appendChild(recipeWrap);
+
+            dialogBox.classList.remove('active');
+            resetDialogBox();
+        };
 
 
 
@@ -436,4 +567,19 @@ export default class extends AbstractView {
 
 
     };
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
