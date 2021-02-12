@@ -423,7 +423,16 @@ button:hover {
   pointer-events: none;
 }
 
-#overlay.active,
-#overlay-edit.active {
+#overlay.active, #overlay-edit.active {
   opacity: 1;
 }
+
+.index-view-item button {
+  color:#5d5a41;
+  background-color: #e0ba2f;
+  border: none;
+  font-family: Fugaz One;
+  font-size: 1rem;
+}
+
+

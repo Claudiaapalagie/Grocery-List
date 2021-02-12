@@ -312,13 +312,6 @@ export default class extends AbstractView {
 
                     openDialogBox(dialogBox);
 
-                    // const recipeViewDiv = clickedButton.parentElement.parentElement.parentElement.parentElement;
-                    // const recipeTitleDiv = recipeViewDiv.children[0];
-                    // const recipeTitle = recipeTitleDiv.children[0];
-                    // const recipeBody = recipeViewDiv.children[1];
-                    // const ingredientsList = recipeBody.children[1];
-                    // const directionsList = recipeBody.children[3];
-
 
                     const recipeNameText = document.querySelector('.add-recipe-name');
                     recipeNameText.setAttribute('data-old-value', recipeTitle.innerText);
